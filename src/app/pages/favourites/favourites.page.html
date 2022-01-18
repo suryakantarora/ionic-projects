@@ -1,0 +1,61 @@
+<ion-header class="ion-no-border">
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-item lines="none" color="primary">
+      <ion-avatar slot="start">
+        <img [src]="global.bank.logo" style="border-radius: 50% !important;border:1px solid #ededed;padding:2px !important">
+      </ion-avatar>
+      <ion-label>
+        <h2> <strong> {{global.bank.fullName}} </strong> </h2>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="global.navCtrl.pop()">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none" color="primary">
+      <ion-label>Favourite Transactions</ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="light">
+          <ion-icon name="search" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="light">
+          <ion-icon name="filter" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-card *ngFor="let r of recents" mode="md" color="light" class="outline-card">
+      <ion-item lines="none" color="light">
+        <ion-label>
+          <h2 class="h2">{{r.date | date:'dd MMM, yyyy'}} {{getWeekDay(r.date)}}</h2>
+        </ion-label>
+      </ion-item>
+      <ion-card *ngFor="let s of r.data;let i=index" mode="md" class="card">
+        <ion-item lines="none">
+          <ion-label>
+            <p style="color:#858585">{{s.type}}</p>
+            <h2><strong><ion-text  color="primary">
+              {{s.name}}</ion-text></strong>
+            </h2>
+            <p><strong>{{s.to}}</strong></p>
+          </ion-label>
+          <div slot="end" class="ion-text-right">
+            <!-- <ion-icon name="ellipsis-vertical" slot="icon-only"></ion-icon> -->
+            <ion-text color="tertiary"><br>
+              <strong>{{global.bank.currencySymbol}} {{s.amount}}</strong><br>
+            </ion-text>
+            <ion-chip color="medium">
+              <strong>Pay Again</strong>
+            </ion-chip>
+          </div>
+        </ion-item>
+      </ion-card>
+    </ion-card>
+  </div>
+</ion-content>

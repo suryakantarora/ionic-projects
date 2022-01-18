@@ -1,0 +1,178 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mobile Topup</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-segment value="new" mode="ios" style="width: 98%;">
+      <ion-segment-button value="new">New</ion-segment-button>
+      <ion-segment-button value="recent">Recent</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="recharge">
+    <div *ngIf="pageStatus===1">
+      <ion-row>
+        <ion-col size="6">
+          <div class="labeling">
+            <ion-card-subtitle>Operator</ion-card-subtitle>
+          </div>
+          <ion-item lines="none" id="item">
+            <ion-select [(ngModel)]="telecom" placeholder="Select" style="width: 100%;">
+              <ion-select-option [value]="t" *ngFor="let t of global.telcom">{{t.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+        <ion-col size="6">
+          <div class="labeling">
+            <ion-card-subtitle>Circle</ion-card-subtitle>
+          </div>
+          <ion-item lines="none" id="item">
+            <ion-select [(ngModel)]="circle" placeholder="Select" style="width: 100%;">
+              <ion-select-option [value]="t" *ngFor="let t of global.circle">{{t}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <div class="labeling" *ngIf="telecom && circle">
+        <ion-card-subtitle>Mobile Number</ion-card-subtitle>
+      </div>
+      <ion-item lines="none" id="item" *ngIf="telecom && circle">
+        <ion-input type="tel" maxlength="10" placeholder="943XXXXX98" [(ngModel)]="mobileNum"></ion-input>
+        <ion-button slot="end" fill="clear" (click)="showContacts()">
+          <ion-icon name="person-add-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <div *ngIf="mobileNum && mobileNum.length===10" style="margin-left: 10px;"scrolX="true">
+        <div class="labeling">
+          <ion-card-subtitle>Select your plan</ion-card-subtitle>
+        </div>
+        <ion-chip size="6" *ngFor="let p of telecom.plans" color="tertiary" style="padding: 0px 10px;" (click)="checkPlan(p)">
+          <ion-label>&nbsp; {{global.bank.currencySymbol + ' ' + p.amount}} &nbsp; </ion-label>
+        </ion-chip>
+      </div>
+      <div class="labeling" *ngIf="telecom && circle">
+        <ion-card-subtitle>Amount</ion-card-subtitle>
+      </div>
+      <ion-item lines="none" id="item" *ngIf="telecom && circle">
+        <ion-label>{{global.bank.currencySymbol}}</ion-label>
+        <ion-input type="tel" maxlength="10" placeholder="Enter Amount" [(ngModel)]="amount"></ion-input>
+      </ion-item>
+      <div class="btn">
+        <ion-button mode="ios" expand="block" (click)="validateMobile()"
+        color="tertiary" [disabled]="!mobileNum || mobileNum.length<10">Proceed</ion-button>
+      </div>
+    </div>
+    <div *ngIf="pageStatus===2">
+      <ion-toolbar>
+        <ion-slides pager="false" [options]="slideOpts" #slider (ionSlideDidChange)="slideChanged(slider)">
+          <ion-slide *ngFor="let s of global.offers">
+            <img [src]="s.imgPath">
+          </ion-slide>
+        </ion-slides>
+      </ion-toolbar>
+      <ion-card style="border-radius: 10px;">
+        <ion-item lines="full">
+          <ion-avatar slot="start">
+            <img [src]="telecom.logo">
+          </ion-avatar>
+          <ion-label>
+            <h2><strong><ion-text color="primary">{{global.user.fullName}}</ion-text></strong></h2>
+            <p><ion-text color="tertiary">{{global.maskMobile(mobileNum)}}</ion-text></p>
+          </ion-label>
+          <ion-chip color="tertiary" (click)="pageStatus=1">
+            <ion-label>Edit</ion-label>
+          </ion-chip>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-row style="width: 100% !important;">
+            <ion-col size="6">
+              <ion-button expand="block" fill="outline" mode="ios" shape="round">
+                {{telecom.name}}<!--  &nbsp; <ion-icon name="chevron-down-outline"></ion-icon> -->
+              </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button expand="block" fill="outline" mode="ios" shape="round">
+                {{circle}} <!-- &nbsp; <ion-icon name="chevron-down-outline"></ion-icon> -->
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+        <ion-card style="box-shadow: none;">
+          <ion-item color="light">
+            <ion-label>
+              <h2 style="font-weight: bolder;font-size: x-large;">
+                {{global.bank.currencySymbol + ' ' + amount}}
+              </h2>
+            </ion-label>
+            <ion-chip color="tertiary" slot="end" (click)="pageStatus=1">
+              <ion-label>Change Plan</ion-label>
+            </ion-chip>
+          </ion-item>
+          <ion-item lines="none" color="light">
+            <ion-label>
+              <p class="ion-text-wrap">
+                {{description}}
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-card>
+      <div class="labeling">
+        <ion-card-subtitle>Select payment method</ion-card-subtitle>
+      </div>
+      <ion-card style="border-radius: 10px;">
+        <ion-toolbar color="light" mode="ios">
+          <ion-segment mode="md" value="W" style="width: 100%;" [(ngModel)]="payFrom">
+            <ion-segment-button value="W">Wallet</ion-segment-button>
+            <ion-segment-button value="A">Account</ion-segment-button>
+          </ion-segment>
+        </ion-toolbar>
+        <div [ngSwitch]="payFrom">
+          <div *ngSwitchCase="'W'">
+            <ion-item lines="none">
+              <ion-label>
+                <h2><ion-text color="primary">
+                   <strong>Balance: {{global.bank.currencySymbol}} {{global.formatNumber(65645645.89)}}</strong>
+                </ion-text></h2>
+                <p><ion-text color="tertiary">{{(global.user.mobile)}}</ion-text></p>
+              </ion-label>
+            </ion-item>
+          </div>
+          <div *ngSwitchCase="'A'">
+            <ion-item mode="md" button detail="false" (click)="showAllAccounts()" lines="none">
+              <ion-label>
+                <ion-text color="tertiary"><p style="font-size: x-small;">{{accType}}</p></ion-text>
+                <h2><ion-text color="primary">{{global.maskedNumber(accNum)}}</ion-text> </h2>
+                <h2><strong><ion-text color="primary">{{ global.getCurrencyText(currency) + ' ' + global.formatNumber(balance)}}</ion-text></strong></h2>
+              </ion-label>
+              <ion-button slot="end" fill="clear">
+                <ion-icon name="chevron-down-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </div>
+        </div>
+        <ion-item lines="none">
+          <ion-label>
+            <p class="ion-text-wrap"><strong>Note: </strong>Pay using <span>{{payFrom==='W'?'Wallet':'Account'}}</span> balance, {{global.bank.currencySymbol + global.formatNumber(amount)}} will be detucted from 
+              <span>{{payFrom==='W'?'Wallet':'Account'}}</span>
+            </p>
+          </ion-label>
+        </ion-item>
+        <div class="ion-padding" (click)="showSuccess()">
+          <ion-button expand="block" color="success" mode="ios">
+            Proceed
+          </ion-button>
+        </div>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar color="light">
+    <ion-button mode="ios" expand="block" color="primary">Proceed</ion-button>
+  </ion-toolbar>
+</ion-footer> -->

@@ -1,0 +1,183 @@
+.header-bg {
+    background-color: var(--ion-color-primary);
+    height:200px;
+    background-image: url('/assets/imgs/top-background.png');
+    background-size: cover;
+}
+.header-content {
+    margin-top: -200px;
+}
+.logo {
+    border-radius: 50% !important;
+}
+.custom-item {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    --padding-start: 8px;
+}
+.custom-toolbar {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    --padding-start: 8px;
+}
+
+
+ion-header {
+    --background: #EDEDED;
+    background-color: #EDEDED;
+}
+
+ion-avatar img{
+    border-radius: 0% !important;
+    overflow: hidden !important;
+    margin: 0px !important;
+    padding:0px !important;
+}
+
+ion-card {
+    border-radius: 10px !important;
+}
+.card-icon {
+    height:40px;
+}
+.card-label {
+    margin: 0px !important;
+    font-weight: bold;
+    font-size: 10px;
+    color: var(--ion-color-primary);
+}
+.card-bottom-label{
+    margin: 0px !important;
+    font-weight: bold;
+    font-size: 10px;
+    color: var(--ion-color-primary);
+}
+
+.right-border{
+    border-right: 1px solid var(--ion-color-primary);
+}
+.profile-pic {
+    border: 1px solid var(--ion-color-tertiary);
+}
+.btn-card {
+    box-shadow: none !important;
+}
+.slide-para {
+    font-size: smaller !important;
+}
+ion-thumbnail img{
+    margin: 0px !important;
+    padding:0px !important;
+}
+.slider-card {
+    margin-left:10px !important;
+    margin-right:10px !important;
+    margin-top:0px !important;
+    margin-bottom: 30px !important;
+    width: 100% !important;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+ion-slides {
+    --bullet-background: var(--ion-color-primary);
+    --bullet-background-active: var(--ion-color-primary);
+}
+.biller-logo {
+    height:70px;
+    width:70px;
+    border: 2px solid var(--ion-color-tertiary);
+    border-radius: 50%;
+    background-color: #dedede;
+
+}
+
+// box login form
+.bg {
+    background-color: #fff;
+}
+.box .inputBox {
+    position: relative;
+  }
+  
+  .box .inputBox input {
+    width: 100%;
+    padding: 0.625rem 20px;
+    font-size: 1rem;
+    letter-spacing: 0.062rem;
+    margin-bottom: 1.875rem;
+    border: 1px solid #ccc;
+    background: transparent;
+    border-radius: 4px;
+    
+  }
+  
+  .box .inputBox label {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    padding: 0.625rem 0;
+    font-size: 1rem;
+    color: grey;
+    pointer-events: none;
+    transition: 0.5s;
+  }
+  
+.box .inputBox input:focus ~ label,
+.box .inputBox input:valid ~ label,
+.box .inputBox input:not([value=""]) ~ label {
+    top: -1.100rem;
+    left: 20px;
+    color: var(--ion-color-primary);
+    font-size: 0.85rem;
+    background-color: white;
+    height: 15px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.box .inputBox input:focus {
+    outline: none;
+    border: 2px solid var(--ion-color-primary);
+}
+.box input[type="submit"] {
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: var(--ion-color-primary);
+    padding: 0.625rem 1.25rem;
+    cursor: pointer;
+    border-radius: 0.312rem;
+    font-size: 1rem;
+    float: right;
+}
+  
+.box input[type="submit"]:hover {
+    background-color: var(--ion-color-primary);
+    box-shadow: 0 1px 1px 0 rgba(66,133,244,0.45), 0 1px 3px 1px rgba(66,133,244,0.3);
+}
+
+.btn-box {
+    margin-top: -20px;
+}
+
+
+
+
+.wrapper {
+	padding-bottom: 30px;
+}
+
+.custom-item {
+    margin-bottom:20px;
+    border: 1px solid #cdcdcd;
+    border-radius: 5px;
+}
+
+.txn-bg {
+    background:url('/assets/imgs/result-bg.png');
+    background-size: cover;
+}
+.transparent {
+    background: transparent;
+    --background: transparent;
+    --ion-color-base: transparent !important;
+}

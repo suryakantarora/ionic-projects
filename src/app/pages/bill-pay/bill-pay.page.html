@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Bill Pay</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" style="padding-left: 7px;padding-right: 7px;">
+    <ion-slides pager="true" mode="ios" [options]="slideOpts" #slider (ionSlideDidChange)="slideChanged(slider)">
+      <ion-slide>
+        <img src="assets/imgs/banners/1.png">
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/imgs/banners/2.png">
+      </ion-slide>
+      <ion-slide>
+        <img src="assets/imgs/banners/3.png">
+      </ion-slide>
+    </ion-slides>
+    <br>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item lines="none" color="medium">
+    <ion-label class="ion-text-center">
+      Please select your biller
+    </ion-label>
+  </ion-item>
+  <!-- <ion-row>
+    <ion-col size="4" *ngFor="let b of billers">
+      <ion-button class="text-on-bottom ion-text-center" fill="clear" mode="ios">
+        <div>
+          <img [src]="b.icon" class="btnImg">
+          <p class="iconLabel"> {{b.title}} </p>
+        </div>
+      </ion-button>
+    </ion-col>
+  </ion-row> -->
+  <ion-row class="ion-no-padding">
+    <ion-col size="6" *ngFor="let b of billers" class="ion-no-padding" (click)="proceddPayment(b)">
+      <ion-card class="btn-card">
+        <ion-item button fill="clear" mode="ios" lines="none" detail="false" class="custom-item">
+          <ion-avatar slot="start" style="margin-right:5px !important">
+            <img [src]="b.icon">
+          </ion-avatar>
+          <ion-label>
+            <p class="iconLabel"> {{b.title}} </p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-content>

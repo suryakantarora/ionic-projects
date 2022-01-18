@@ -1,0 +1,131 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>FD Request</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="card-box" color="light">
+    <ion-card-header>
+      <ion-card-title class="ion-text-left"><ion-text color="primary">
+        <strong>Earn on your idle money</strong></ion-text>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-row>
+      <ion-col size="3">
+        <img src="assets/imgs/like-design-new.jpg">
+      </ion-col>
+      
+      <ion-col size="9">
+        <span style="margin-left: 16px;">
+          <ion-text color="tertiary">Deposit Amount</ion-text>
+        </span>
+        <ion-item color="light">
+          <ion-label class="currency">{{global.bank.currencySymbol}}</ion-label>
+          <ion-input type="tel" class="tel" maxlength="10" [(ngModel)]="fd.amount" placeholder="0.00"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card class="ion-padding card-box">
+    <ion-row>
+      <ion-col size="6" style="padding: 0px !important;">
+        <ion-item lines="none" style="padding: 0px !important;">
+          <ion-label class="ion-text-center">
+            <p>Interest Rate</p>
+            <h2><strong>{{fd.rate}}%</strong></h2>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+      <ion-col size="6" style="padding: 0px !important;">
+        <ion-item lines="none" style="border-left: 1px solid #ccc;">
+          <ion-label class="ion-text-center">
+            <p>Tenure</p>
+            <h2><strong>{{fd.tenure}}</strong></h2>
+          </ion-label>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card class="card-box">
+    <ion-card-header>
+      <ion-card-title><ion-text color="primary"><strong>Interest Credit Frequency</strong></ion-text></ion-card-title>
+    </ion-card-header>
+    <ion-row>
+      <ion-col size="4" class="ion-no-margin ion-no-padding" (click)="setCrdeitFrequency('M')">
+        <ion-card>
+          <ion-item lines="none" button [color]="fd.creditFrequency==='M'?'tertiary':''">
+            <ion-label class="ion-text-center">Monthly</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" class="ion-no-margin ion-no-padding" (click)="setCrdeitFrequency('Q')">
+        <ion-card>
+          <ion-item lines="none" button [color]="fd.creditFrequency==='Q'?'tertiary':''">
+            <ion-label class="ion-text-center">Quarterly</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4" class="ion-no-margin ion-no-padding" (click)="setCrdeitFrequency('OM')">
+        <ion-card>
+          <ion-item lines="none" button [color]="fd.creditFrequency==='OM'?'tertiary':''">
+            <ion-label class="ion-text-center">On Maturity</ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-label>
+        <h2>Auto Renewal</h2>
+      </ion-label>
+      <ion-toggle [(ngModel)]="fd.autoRenew" color="tertiary"></ion-toggle>
+    </ion-item>
+    <ion-item button (click)="showAllAccounts()">
+      <ion-label>
+        <p>Account to be debitted</p>
+        <h2>{{global.maskedNumber(fd.debitAccount)}}</h2>
+      </ion-label>
+      <ion-icon slot="end" name="chevron-down"></ion-icon>
+    </ion-item>
+    <ion-item lines="none" button>
+      <ion-label class="ion-text-wrap">
+        <p>I hereby authorize to debit my account and {{global.maskedNumber(fd.debitAccount)}} 
+          for the creation of my FD account and agree to the <a>Terms & Conditions</a></p>
+      </ion-label>
+      <ion-checkbox slot="end"checked color="primary" mode="ios"></ion-checkbox>
+    </ion-item>
+  </ion-card>
+  <!-- <ion-card>
+    <ion-item lines="none" button (click)="showAllAccounts()">
+      <ion-label>
+        <p>Account to be debitted</p>
+        <h2>{{global.maskedNumber(fd.debitAccount)}}</h2>
+      </ion-label>
+      <ion-icon slot="end" name="chevron-down"></ion-icon>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label class="ion-text-wrap">
+        <p>I hereby authorize to debit my account and {{global.maskedNumber(fd.debitAccount)}} 
+          for the creation of my FD account and agree to the <a>Terms & Conditions</a></p>
+      </ion-label>
+      <ion-checkbox slot="start"checked color="primary" mode="md"></ion-checkbox>
+    </ion-item>
+  </ion-card> -->
+  <ion-card (click)="showSuccess()">
+    <ion-item lines="none" color="primary" button>
+      <ion-label class="ion-text-center">
+        <h2><ion-text color="light">Place FD Request</ion-text></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-button fill="clear" expand="block" mode="ios" color="tertiary">
+    <strong>Customize your FD</strong>
+  </ion-button>
+</ion-content>

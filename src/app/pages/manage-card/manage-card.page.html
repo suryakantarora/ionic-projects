@@ -1,0 +1,190 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Manage Card</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" mode="ios" style="padding-left: 8px;padding-right: 8px;">
+    <ion-segment value="debit" style="width: 100% !important;" [(ngModel)]="cardType">
+      <ion-segment-button value="debit">Debit Card</ion-segment-button>
+      <ion-segment-button value="credit">Credit Card</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="cardType">
+    <div *ngSwitchCase="'debit'">
+      <div class="card-background">
+        <ion-card class="debit-card" *ngFor="let c of global.bank.debitCard">
+          <img src="assets/imgs/top-background.png"/>
+          <div class="chip">
+            <img src="assets/imgs/card-chip.png" style="height: 60px;">
+          </div>
+          <div class="logo">
+            <img src="assets/imgs/visa-icon-96.png" style="height: 30px;">
+          </div>
+          <div class="user-name">
+            {{c.cardName}}
+          </div>
+          <div class="card-title">{{c.cardNumber}}</div>
+          <div class="card-subtitle">Exp: {{c.expiry.month + '/' + c.expiry.year}}</div>
+          <ion-card-content class="ion-no-padding ion-no-margin">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col size="4" class="ion-no-padding ion-no-margin">
+                <ion-chip color="success">
+                  <ion-icon name="create-outline"></ion-icon>
+                  <ion-label>New PIN</ion-label>
+                </ion-chip>
+              </ion-col>
+              <ion-col size="4" class="ion-no-padding ion-no-margin">
+                <ion-chip color="danger">
+                  <ion-icon name="card-outline"></ion-icon>
+                  <ion-label>Block Card</ion-label>
+                </ion-chip>
+              </ion-col>
+              <ion-col size="4" class="ion-no-padding ion-no-margin">
+                <ion-chip color="primary" (click)="global.setPage('add-card')">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                  <ion-label>Add Card</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <ion-card style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios">
+            <ion-label>
+              <h2><strong>Card Status: 
+                <ion-text color="success">Active</ion-text>
+              </strong></h2>
+              <p>Card is active now</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+        <ion-card  style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios" detail="false">
+            <ion-label>
+              <h2><strong>E-Com Status: 
+                <ion-text color="success">Active</ion-text>
+              </strong></h2>
+              <p>Use toggle to change the status</p>
+            </ion-label>
+            <ion-toggle checked="true" slot="end" color="success"></ion-toggle>
+          </ion-item>
+        </ion-card>
+        <ion-card  style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios" detail="false">
+            <ion-label>
+              <h2><strong>National Transactions: 
+                <ion-text color="success">ON</ion-text>
+              </strong></h2>
+              <p>Use toggle to change the status</p>
+            </ion-label>
+            <ion-toggle checked="true" slot="end" color="success"></ion-toggle>
+          </ion-item>
+        </ion-card>
+        <ion-card  style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios" detail="false">
+            <ion-label>
+              <h2><strong>International Transactions: 
+                <ion-text color="success">ON</ion-text>
+              </strong></h2>
+              <p>Use toggle to change the status</p>
+            </ion-label>
+            <ion-toggle checked="true" slot="end" color="success"></ion-toggle>
+          </ion-item>
+        </ion-card>
+      </div>
+    </div>
+    <div *ngSwitchCase="'credit'">
+      <div class="card-background">
+        <ion-card class="debit-card" *ngFor="let c of global.bank.debitCard">
+          <img src="assets/imgs/top-background.png"/>
+          <div class="chip">
+            <img src="assets/imgs/card-chip.png">
+          </div>
+          <div class="logo">
+            <img src="assets/imgs/mastercard-icon-96.png" style="height: 50px;">
+          </div>
+          <div class="user-name">
+            {{c.cardName}}
+          </div>
+          <div class="card-title">{{c.cardNumber}}</div>
+          <div class="card-subtitle">Exp: {{c.expiry.month + '/' + c.expiry.year}}</div>
+          <ion-card-content class="ion-no-padding ion-no-margin">
+            <ion-row class="ion-no-padding ion-no-margin">
+              <ion-col size="4" class="ion-no-padding ion-no-margin">
+                <ion-chip color="success">
+                  <ion-icon name="create-outline"></ion-icon>
+                  <ion-label>New PIN</ion-label>
+                </ion-chip>
+              </ion-col>
+              <ion-col size="4" class="ion-no-padding ion-no-margin">
+                <ion-chip color="danger">
+                  <ion-icon name="card-outline"></ion-icon>
+                  <ion-label>Block Card</ion-label>
+                </ion-chip>
+              </ion-col>
+              <ion-col size="4" class="ion-no-padding ion-no-margin">
+                <ion-chip color="primary" (click)="global.setPage('add-card')">
+                  <ion-icon name="add-circle-outline"></ion-icon>
+                  <ion-label>Add Card</ion-label>
+                </ion-chip>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+        <ion-card style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios">
+            <ion-label>
+              <h2><strong>Card Status: 
+                <ion-text color="success">Active</ion-text>
+              </strong></h2>
+              <p>Card is active now</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+        <ion-card  style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios" detail="false">
+            <ion-label>
+              <h2><strong>E-Com Status: 
+                <ion-text color="success">Active</ion-text>
+              </strong></h2>
+              <p>Use toggle to change the status</p>
+            </ion-label>
+            <ion-toggle checked="true" slot="end" color="success"></ion-toggle>
+          </ion-item>
+        </ion-card>
+        <ion-card  style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios" detail="false">
+            <ion-label>
+              <h2><strong>National Transactions: 
+                <ion-text color="success">ON</ion-text>
+              </strong></h2>
+              <p>Use toggle to change the status</p>
+            </ion-label>
+            <ion-toggle checked="true" slot="end" color="success"></ion-toggle>
+          </ion-item>
+        </ion-card>
+        <ion-card  style="border-radius: 10px;border:1px solid #ccc;">
+          <ion-item lines="none" button mode="ios" detail="false">
+            <ion-label>
+              <h2><strong>International Transactions: 
+                <ion-text color="success">ON</ion-text>
+              </strong></h2>
+              <p>Use toggle to change the status</p>
+            </ion-label>
+            <ion-toggle checked="true" slot="end" color="success"></ion-toggle>
+          </ion-item>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="global.setPage('add-card')">
+      <ion-icon name="add-outline" mode="ios"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

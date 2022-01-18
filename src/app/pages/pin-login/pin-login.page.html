@@ -1,0 +1,107 @@
+<ion-header class="ion-no-border">
+  <div class="top-header ion-text-center"></div>
+  <div class="ion-text-center" class="header-logo">
+    <img [src]="global.bank.logo" class="logo" />
+  </div>
+</ion-header>
+<ion-content>
+  <div id="container">
+    <div class="ion-text-center">
+      <!-- <img [src]="global.bank.logo" class="logo"> -->
+      <ion-label class="ion-text-center">
+          <h2 class="logo-text">
+            <span class="logo-text-one"> Login </span>
+          </h2>
+          <p class="signin-paragraph">Enter your PIN to login</p>
+      </ion-label>
+      <div class="wrapper">
+        <div class="divider div-transparent div-dot"></div>
+      </div>
+    </div>
+    <div class="bg">
+      <div class="ion-padding">
+        <div class="box">
+          <form class="ion-text-center">
+            <div class="pin-login">
+              <form id="ios">
+                <ion-row>
+                  <ion-col size="3">
+                    <ion-icon [name]="p1?'ellipse':'ellipse-outline'"></ion-icon>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-icon  [name]="p2?'ellipse':'ellipse-outline'"></ion-icon>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-icon  [name]="p3?'ellipse':'ellipse-outline'"></ion-icon>
+                  </ion-col>
+                  <ion-col size="3">
+                    <ion-icon  [name]="p4?'ellipse':'ellipse-outline'"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </form>  
+              <div class="dialer">
+                <ion-row>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('1')">1</button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('2')">2</button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('3')">3</button>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('4')">4</button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('5')">5</button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('6')">6</button>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('7')">7</button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('8')">8</button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('9')">9</button>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer"  (click)="goBack()">
+                      <ion-icon slot="icon-only" name="close" style="margin-top: 12px;"></ion-icon>
+                    </button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="pinClicked('0')">0</button>
+                  </ion-col>
+                  <ion-col size="4" class="ion-text-center">
+                    <button type="button" class="btn-dialer" (click)="clearPin()">
+                      <ion-icon slot="icon-only" name="backspace" style="margin-top: 12px;"></ion-icon>
+                    </button>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-item button color="primary" lines="none" (click)="goBack()">
+      <ion-label class="ion-text-center">
+        Dismiss
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,59 @@
+<!-- <ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>customer-loyality</ion-title>
+  </ion-toolbar>
+</ion-header>
+ -->
+ <ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Loyality Points</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary">
+    <div class="container">
+      <img src="assets/imgs/banners/dark-background.jpg" alt="Snow" style="width:100%;height: 200px;">
+      <div class="centered">
+        <h2 class="points">
+          <ion-icon name="trophy" class="point-icon"></ion-icon>
+          550</h2>
+        <p>Total Reward Points</p>
+      </div>
+    </div>
+    <ion-item lines="none" color="primary">
+      <ion-label>
+        <h2>Earned in last 12 months: 
+          <ion-icon name="trophy" size="small"></ion-icon>
+          <span style="font-size: larger;font-weight: bold;"> 550</span>
+        </h2>
+      </ion-label>
+      <ion-chip slot="end" color="tertiary">
+        <ion-label>Know  More...</ion-label>
+      </ion-chip>
+    </ion-item>
+  </ion-toolbar>
+ </ion-header>
+<ion-content>
+  <ion-card *ngFor="let l of loyalities">
+    <div class="container">
+      <img [src]="l.banner">
+      <div class="centered">
+        <h2 class="merchant-name">{{l.name}}</h2>
+        <ion-button fill="outline" mode="ios" color="light">
+          Get using: <ion-icon name="trophy" size="small"></ion-icon> {{l.points}} points
+        </ion-button>
+      </div>
+    </div>
+  </ion-card>
+</ion-content>
+<!-- <ion-footer>
+  <ion-toolbar color="primary">
+    <ion-button expand="block" color="tertiary" mode="ios">
+      Back
+    </ion-button>
+  </ion-toolbar>
+</ion-footer> -->

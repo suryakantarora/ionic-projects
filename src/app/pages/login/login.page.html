@@ -1,0 +1,60 @@
+<ion-header class="ion-no-border">
+  <div class="top-header ion-text-center"></div>
+  <div class="ion-text-center" class="header-logo">
+    <img [src]="global.bank.logo" class="logo" />
+  </div>
+</ion-header>
+<ion-content>
+  <div id="container">
+    <div class="ion-text-center">
+      <!-- <img [src]="global.bank.logo" class="logo"> -->
+      <ion-label class="ion-text-center">
+          <h2 class="logo-text">
+            <span class="logo-text-one"> Login </span>
+          </h2>
+          <p class="signin-paragraph">Please login to use the app</p>
+      </ion-label>
+      <div class="wrapper">
+        <div class="divider div-transparent div-dot"></div>
+      </div>
+    </div>
+    <div class="bg">
+      <div class="ion-padding">
+        <div class="box">
+          <form class="ion-text-center">
+            <div class="inputBox">
+              <input type="email" name="email" required onkeyup="this.setAttribute('value', this.value);"  value="" [(ngModel)]="userName">
+              <label>Enter your username</label>
+            </div>
+            <div class="inputBox" style="margin-top:-10px;">
+              <input type="password" name="text" required onkeyup="this.setAttribute('value', this.value);" value="" [(ngModel)]="password">
+              <label>Enter your password</label>
+            </div>
+            <div class="btn-box">
+              <ion-button mode="ios" expand="block" fill="clear" color="danger">Forgot Password? Click Here</ion-button>
+              <ion-button mode="ios" expand="block" (click)="loginValidation()">Sign In</ion-button>
+            </div>
+            <br>
+            <ion-row>
+              <ion-col class="ion-text-right" (click)="biometricLogin()">
+                <ion-icon name="finger-print-outline" class="biometric-icon"></ion-icon>
+              </ion-col>
+              <ion-col class="ion-text-left" (click)="pinLogin()">
+                <ion-icon name="apps-outline" class="pin-icon"></ion-icon>
+              </ion-col>
+            </ion-row>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer *ngIf="!userName && !password">
+  <ion-toolbar color="primary">
+    <ion-item lines="none" color="primary">
+      <ion-label class="ion-text-center">
+        <p><strong>App Version:</strong> 1.0.0</p>
+      </ion-label>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

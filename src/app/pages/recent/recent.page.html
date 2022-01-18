@@ -1,0 +1,58 @@
+
+<ion-content>
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-item lines="none" color="primary">
+      <ion-avatar slot="start">
+        <img [src]="global.bank.logo" style="border-radius: 50% !important;border:1px solid #ededed;padding:2px !important">
+      </ion-avatar>
+      <ion-label>
+        <h2> <strong> {{global.bank.fullName}} </strong> </h2>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="global.navCtrl.pop()">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none" color="primary">
+      <ion-label>
+        <h2> Recent Transactions</h2>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="light">
+          <ion-icon name="search" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="light">
+          <ion-icon name="filter" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-card *ngFor="let r of recents">
+      <ion-card-header>
+        <ion-card-subtitle>{{r.date | date:'dd MMM, yyyy'}} {{getWeekDay(r.date)}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <ion-list lines="full" mode="ios">
+          <ion-item *ngFor="let s of r.data;let i=index" [lines]="i===r.data.length-1?'none':'full'">
+            <ion-avatar slot="start">
+              <img src="assets/imgs/up-arrow.png" *ngIf="s.type==='DR'">
+              <img src="assets/imgs/down-arrow.png" *ngIf="s.type==='CR'">
+            </ion-avatar>
+            <ion-label>
+              <h2><strong><ion-text  color="primary">
+                <span *ngIf="s.type==='DR'">To:</span> 
+                <span *ngIf="s.type==='CR'">From:</span> 
+                {{s.name}}</ion-text></strong>
+              </h2>
+              <p>{{today | date:'dd MMM, yyyy hh:mm a'}}</p>
+            </ion-label>
+            <ion-text color="tertiary" slot="end">
+              <strong>{{global.bank.currencySymbol}} {{s.amount}}</strong>
+            </ion-text>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

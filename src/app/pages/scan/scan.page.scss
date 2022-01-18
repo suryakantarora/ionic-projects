@@ -1,0 +1,25 @@
+
+.transparentBody {
+    background: transparent none !important;
+    --background: transparent none !important;
+}
+.solidBg {
+    background: #fff !important;
+    --background: #fff !important;
+}
+.show-qr-scanner {
+    display: none;
+}
+
+ion-content {
+    --background: url('/assets/imgs/QR.png') no-repeat cover fixed center; 
+    background: url('/assets/imgs/QR.png') no-repeat fixed center; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+}
+ion-col {
+    img {
+        height: 60px !important;
+    }
+}

@@ -1,0 +1,239 @@
+<ion-header class="ion-no-border">  
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-item lines="none" color="primary">
+      <ion-avatar slot="start">
+        <img [src]="global.bank.logo" style="border-radius: 10px !important;border:1px solid #ededed;padding:2px !important">
+      </ion-avatar>
+      <ion-label>
+        <h2>
+          <strong> {{global.bank.fullName}} </strong>
+        </h2>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="light" (click)="toggleMenu()">
+          <ion-icon name="menu" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none" color="primary">
+      <ion-avatar slot="start" (click)="global.setPage('profile')">
+        <img style="border-radius:8px !important;"
+        [src]="global.user.profilePic" class="profile-pic">
+      </ion-avatar>
+      <ion-label (click)="global.setPage('profile')">
+        <h2> Hello {{global.user.nickName}},</h2>
+        <p> {{global.user.mobile}} </p>
+      </ion-label>
+      <ion-button slot="end" fill="clear" color="light" (click)="global.setPage('search')">
+        <ion-icon name="search" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-item>
+    <ion-card>
+      <ion-item lines="full">
+        <ion-label>
+          <p style="font-weight: bold;"><ion-text color="tertiary">Total Balance</ion-text></p>
+        </ion-label>
+        <ion-label slot="end">
+          <h2 style="font-weight: bold;">
+            <ion-text color="primary">
+              {{global.bank.currencySymbol}} 150,990,880.00
+            </ion-text>
+          </h2>
+        </ion-label>
+      </ion-item>
+      <ion-row style="padding: 0px !important;margin:5px !important;border-bottom: 1px solid #eddddd;">
+        <ion-col size="3" class="ion-text-center"(click)="global.setPage('a2a')">
+          <img src="assets/imgs/fund-transfer.png" class="card-icon">
+          <p class="card-label">Transfer</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center"(click)="global.setPage('services')">
+          <img src="assets/imgs/quick-pay.png" class="card-icon">
+          <p class="card-label">VAS</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center" (click)="global.setPage('scan')">
+          <img src="assets/imgs/best-pay.png" class="card-icon">
+          <p class="card-label">Scan & Pay</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center" (click)="global.setPage('topup')">
+          <img src="assets/imgs/top-up2.png" class="card-icon">
+          <p class="card-label">Topup</p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-no-padding ion-no-margin" style="padding-bottom: 3px !important">
+        <ion-col size="4" class="ion-text-center ion-no-padding ion-no-margin right-border" (click)="global.setPage('recent')">
+          <!-- <p class="card-bottom-label right-border">Recent</p> -->
+          <ion-button fill="clear" mode="ios" size="small" class="ion-no-padding ion-no-margin"> Recent </ion-button>
+        </ion-col>
+        <ion-col size="4" class="ion-text-center ion-no-padding ion-no-margin right-border" (click)="global.setPage('manage-card')">
+          <!-- <p class="card-bottom-label right-border">Manage Card</p> -->
+          <ion-button fill="clear" mode="ios" size="small" class="ion-no-padding ion-no-margin"> Manage Card </ion-button>
+        </ion-col>
+        <ion-col size="4" class="ion-text-center ion-no-padding ion-no-margin" (click)="global.setPage('statement')">
+          <!-- <p class="card-bottom-label">Services</p> -->
+          <ion-button fill="clear" mode="ios" size="small" class="ion-no-padding ion-no-margin"> Statement </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+</ion-header>
+<ion-content>
+  <div class="sliders">
+    <ion-slides pager="true" mode="ios" [options]="slideOpts" #slider (ionSlideDidChange)="slideChanged(slider)">
+      <ion-slide *ngFor="let s of sliders">
+        <ion-card class="slider-card">
+          <ion-item lines="none">
+            <ion-thumbnail slot="start" style="margin: 0px !important;">
+              <img [src]="s.imagePath">
+            </ion-thumbnail>
+            <ion-label>
+              <h2><strong>
+                <ion-text color="primary">{{s.header}}</ion-text>
+              </strong></h2>
+              <p class="slide-para ion-text-wrap">{{s.para}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  </div>
+  <div>
+    <ion-row style="padding:0px !important; margin: 0px !important;">
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('profile')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/profile.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Profile</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('upi')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/upi-home.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>UPI</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card" (click)="global.setPage('accounts')">
+          <ion-item lines="none" button mode="md">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/account.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Accounts</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('bill-pay')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/bill-payments.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Bill Pay</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('wallet')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/wallet.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Wallet</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('statement')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/statement.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Statement</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('topup')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/top-up.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Topup</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('favourites')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/favourites.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Favourite</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('offers')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/offers.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Offers</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col><!-- 
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('upi')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/upi-home.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>UPI</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col> -->
+      <!-- <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('send-money')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/send-money.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Send Money</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('request-money')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/request-money.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>Request Money</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+        <ion-card class="btn-card">
+          <ion-item lines="none" button mode="md" (click)="global.setPage('nfc')">
+            <ion-avatar slot="start" style="margin-right:5px !important;">
+              <img src="assets/imgs/nfc-transfer.png">
+            </ion-avatar>
+            <ion-label color="primary"> <strong>NFC Transfer</strong> </ion-label>
+          </ion-item>
+        </ion-card>
+      </ion-col> -->
+    </ion-row>
+  </div>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button color="primary" (click)="global.setPage('chat')">
+      <img src="assets/imgs/support-active.png" style="padding:8px;">
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

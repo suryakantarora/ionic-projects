@@ -1,0 +1,40 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Merchant Discounts</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let m of merchants">
+    <ion-fab horizontal="end">
+      <ion-fab-button>
+        <ion-icon name="heart-outline" color="danger"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    <div class="ion-padding ion-text-center">
+      <img [src]="m.logo">
+      <div class="seperator">&nbsp;</div>
+    </div>
+    <ion-fab horizontal="end" style="margin-top: 5px;">
+      <ion-label>
+        <ion-text color="tertiary" class="discount"><strong>{{m.discount}}</strong></ion-text>
+      </ion-label>
+    </ion-fab>
+    <ion-item lines="none">
+      <ion-label>
+        <h2>{{m.name}}</h2>
+        <p class="ion-text-wrap">Mobile: {{m.mobile}}</p>
+        <p class="ion-text-wrap">Address: {{m.address}}</p>
+      </ion-label>
+      
+    </ion-item>
+    <ion-button fill="clear" expand="full" mode="ios" size="small">
+      <!-- <ion-icon name="phone-portrait-outline" size="small"></ion-icon> -->
+      More Details...
+      <ion-icon name="chevron-forward-outline" size="small"></ion-icon>
+    </ion-button>
+  </ion-card>
+</ion-content>

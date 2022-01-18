@@ -1,0 +1,164 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-back-button icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Send Money</ion-title>
+  </ion-toolbar>
+  <ion-item color="light" lines="none">
+    <ion-label class="ion-text-center">
+      <p>NFC Money Transfer</p>
+    </ion-label>
+  </ion-item>
+</ion-header>
+
+<ion-content>
+  
+  <div *ngIf="pageStatus===1">
+    <div id="outerContainer">
+      <div id="container">
+        <div class="c-item">
+          <img src="assets/imgs/nfc-transfer2.png" class="logo"/>
+        </div>
+        <div class="circle" style="animation-delay: -3s"></div>
+        <div class="circle" style="animation-delay: -2s"></div>
+        <div class="circle" style="animation-delay: -1s"></div>
+        <div class="circle" style="animation-delay: 0s"></div>
+      </div>
+    </div>
+    <div class="ion-text-center">
+      <ion-chip color="success">
+        <ion-label>
+          <strong>Scanning nearby devices...</strong>
+        </ion-label>
+      </ion-chip>
+    </div>
+    <ion-item lines="none">
+      <ion-label class="ion-text-center">
+        <p class="ion-text-wrap">
+          Please keep both phone closer to each other, so that can scan faster
+        </p>
+      </ion-label>
+    </ion-item>
+  </div>
+  <div *ngIf="pageStatus===2">
+    <ion-card class="custom-card">
+      <ion-item lines="full" color="primary">
+        <ion-label class="ion-text-center ion-text-wrap">
+          <p>Please verify the device detail and proceed</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>User Name</p>
+          <h2><strong>Manibharathi S</strong></h2>
+        </ion-label>
+        <ion-icon slot="end" name="checkmark-circle" color="success"></ion-icon>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Mobile Number</p>
+          <h2><strong>{{global.user.mobile}}</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Customer Type</p>
+          <h2><strong>Wallet Customer</strong></h2>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button expand="block" color="success" mode="ios" (click)="pageStatus=3">
+          Proceed
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+  <div *ngIf="pageStatus===3">
+    <ion-card class="custom-card">
+      <ion-item lines="full" color="primary">
+        <ion-label class="ion-text-center ion-text-wrap">
+          <p>Enter amount & remarks</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label> Pay From: </ion-label>
+        <ion-select value="W" [(ngModel)]="global.payFrom">
+          <ion-select-option value="W" checked="true">Wallet</ion-select-option>
+          <ion-select-option value="A">Account</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full" *ngIf="global.payFrom==='A'">
+        <ion-label> Account No.: </ion-label>
+        <ion-select placeholder="-Select-">
+          <!-- <ion-select-option value="0" checked="true">-Select-</ion-select-option> -->
+          <ion-select-option [value]="a.accNo" *ngFor="let a of global.bank.accountList">{{a.accNo}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label> Amount: ({{global.getCurrencyText(global.bank.currencyCode)}})</ion-label>
+        <ion-input type="tel" maxlength="10" placeholder="Amount"></ion-input>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label> Remarks: </ion-label>
+        <ion-input type="text" maxlength="30" placeholder="Remarks"></ion-input>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button mode="ios" color="success" expand="block" (click)="proceedPayment()">
+          Proceed
+        </ion-button>
+      </div>
+    </ion-card>
+  </div>
+  <div class="ion-text-center" *ngIf="pageStatus===4" style="padding:16px;padding-top: 80px;">
+    <div class="success-card transparent">
+      <img src="assets/imgs/check-circle.gif" class="success-icon">
+      <ion-item class="transparent" lines="full">
+        <ion-label class="ion-text-center">
+          <h2 style="font-size: larger;"><strong><ion-text color="success">Success</ion-text></strong></h2>
+          <p>{{today | date:'dd-MMM-yyyy hh:mm:ss'}}</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Txn Reference No.</p>
+          <h2><strong>3274691741649785694375</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Paid To</p>
+          <h2><strong>Suryakant Kumar</strong></h2>
+        </ion-label>
+        <ion-label slot="end" class="ion-text-right">
+          <p>Paid From</p>
+          <h2><strong>Wallet</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Amount</p>
+          <h2><strong>{{global.getCurrencyText(global.bank.currencyCode)}} 100,990,000</strong></h2>
+        </ion-label>
+        <ion-label slot="end" class="ion-text-right">
+          <p>Remarks</p>
+          <h2><strong>NFC Transfer</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-row class="ion-padding">
+        <ion-col size="6" class="ion-text-right">
+          <ion-chip color="tertiary" (click)="global.pop()">
+            <ion-icon name="home"></ion-icon>
+            <ion-label style="padding-right:20px">Home</ion-label>
+          </ion-chip>
+        </ion-col>
+        <ion-col size="6" class="ion-text-left">
+          <ion-chip color="success" (click)="global.shareScreenShot()">
+            <ion-icon name="share"></ion-icon>
+            <ion-label style="padding-right:20px">Share</ion-label>
+          </ion-chip>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-content>

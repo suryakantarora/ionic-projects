@@ -1,0 +1,36 @@
+ion-label {
+    p {
+        color: var(--ion-color-tertiary);
+    }
+    h2 {
+        color: var(--ion-color-primary);
+        font-weight: bold;
+    }
+}
+.card-box {
+    border-radius: 10px;
+    ion-card-header {
+        ion-card-title {
+            font-size: medium;
+        }
+    }
+}
+ion-content {
+    --background: linear-gradient(var(--ion-color-primary), var(--ion-color-light));
+}
+ion-card {
+    border-radius: 10px;
+    ion-item {
+        ion-label {
+            font-size: small;
+        }
+    }
+}
+.currency {
+    font-size: x-large !important;
+    color: var(--ion-color-primary);
+}
+.tel {
+    color: var(--ion-color-primary);
+    font-size: x-large;
+}

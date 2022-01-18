@@ -1,0 +1,55 @@
+<ion-content>
+  <br>
+  <div *ngIf="alertType==='ALERT'">
+    <div class="ion-text-center">
+      <ion-icon name="alert-circle-outline" style="font-size: 25pt;" color="primary"></ion-icon>
+    </div>
+    <ion-item lines="none">
+      <ion-label>
+        <h2 class="header-text"> {{alert.head}} </h2>
+        <p class="para-text ion-text-wrap"> {{alert.body}} </p>
+      </ion-label>
+    </ion-item>
+    <br>
+    <div class="ion-text-center">
+      <div style="width: 90%;margin:auto">
+        <button type="button" class="btn" (click)="global.popoverCtrl.dismiss()">Dismiss</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="alertType==='SUCCESS'">
+    <div class="ion-text-center">
+      <ion-icon name="checkmark-circle-outline" style="font-size: 25pt;" color="primary"></ion-icon>
+    </div>
+    <ion-item lines="none">
+      <ion-label>
+        <h2 class="header-text"> Success </h2>
+        <p class="para-text ion-text-wrap"> {{alert.body}} </p>
+      </ion-label>
+    </ion-item>
+    <br>
+    <div class="ion-text-center">
+      <div style="width: 90%;margin:auto">
+        <button type="button" class="btn" (click)="global.popoverCtrl.dismiss()">Dismiss</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="alertType==='FAIL'">
+    <div class="ion-text-center">
+      <ion-icon name="close-circle-outline" style="font-size: 25pt;" color="primary"></ion-icon>
+    </div>
+    <ion-item lines="none">
+      <ion-label>
+        <h2 class="header-text"> Failed </h2>
+        <p class="para-text ion-text-wrap"> {{alert.body}} </p>
+      </ion-label>
+    </ion-item>
+    <br>
+    <div class="ion-text-center">
+      <div style="width: 90%;margin:auto">
+        <button type="button" class="btn" (click)="global.popoverCtrl.dismiss()">Dismiss</button>
+      </div>
+    </div>
+  </div>
+  <br>
+</ion-content>

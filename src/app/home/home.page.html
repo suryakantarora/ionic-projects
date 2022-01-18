@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button fill="clear" (click)="drawer.toogleDrawer()">X</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" color="primary" scrollY="false">
+  <div id="container" class="custome-font">
+    <h2>Welcome</h2>
+  </div>
+  <div class="backdrop" [ngClass]="backdropVisible ? 'fade-in': 'fade'" tappable (click)="drawer.toogleDrawer()">
+
+  </div>
+  <app-drawer (openStateChanged)="toggleBackdrop($event)" #drawer></app-drawer>
+</ion-content>

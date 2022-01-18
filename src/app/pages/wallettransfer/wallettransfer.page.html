@@ -1,0 +1,151 @@
+<ion-header class="ion-no-border">
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-toolbar color="primary" class="custom-toolbar">
+      <ion-buttons slot="end">
+        <ion-back-button icon="close"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <div class="ion-text-center">
+      <img [src]="walletTitle.icon" class="biller-logo">
+      <ion-title color="light"> {{walletTitle.title}}</ion-title>
+    </div>
+    <div style="width:120px;margin:auto;margin-top:12px;">
+      <ion-row>
+        <ion-col size="3">
+          <ion-icon [name]="pageStatus>=1?'radio-button-on':'radio-button-off'" color="light"
+            style="font-size: larger;"></ion-icon>
+        </ion-col>
+        <ion-col size="3">
+          <ion-icon [name]="pageStatus>=2?'radio-button-on':'radio-button-off'" color="light"
+            style="font-size: larger;"></ion-icon>
+        </ion-col>
+        <ion-col size="3">
+          <ion-icon [name]="pageStatus>=3?'radio-button-on':'radio-button-off'" color="light"
+            style="font-size: larger;"></ion-icon>
+        </ion-col>
+        <ion-col size="3">
+          <ion-icon [name]="pageStatus>=4?'radio-button-on':'radio-button-off'" color="light"
+            style="font-size: larger;"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+</ion-header>
+
+
+<ion-content>
+  <div class="ion-padding bg">
+    <div class="box">
+      <div class="ion-text-center" *ngIf="pageStatus===1">
+        <label slot="start">To Wallet Mobile Number</label>
+        <ion-item lines="none" style="border:1px solid #2E368D; border-radius:5px;">
+          <ion-input type="tel" id="search_field" maxlength="10" [(ngModel)]="mobileNumber" placeholder="Mobile Number">
+          </ion-input>
+          <ion-button (click)="loadContact()" color="light">
+            <ion-icon name="person-add-outline" color="dark" slot="icon-only" class="ion-padding-left"></ion-icon>
+          </ion-button>
+        </ion-item>
+      </div>
+
+      <div class="ion-text-center" *ngIf="pageStatus===2">
+
+        <p style="text-align: left;">Amount</p>
+        <ion-item lines="none" style="border:1px solid #2E368D; border-radius:5px;">
+          <ion-input type="tel" [(ngModel)]="amount" placeholder="Amount"> </ion-input>
+          <ion-button (click)="loadContact()" color="light">
+            {{global.getCurrencyText(global.bank.currencyCode)}}
+          </ion-button>
+        </ion-item>
+
+        <p style="text-align: left;">Remarks</p>
+        <ion-item lines="none" style="border:1px solid #2E368D; border-radius:5px;">
+          <ion-input type="text" [(ngModel)]="remarks" placeholder="remarks"> </ion-input>
+        </ion-item>
+      </div>
+
+      <div class="result">
+        <form class="ion-text-center" *ngIf="pageStatus===3" class="txn-bg">
+          <ion-item lines="full" class="transparent">
+            <ion-label class="ion-text-wrap">
+              <ion-row>
+                <ion-col size="5">Pay For:</ion-col> <ion-col size="7">Wallet to Wallet</ion-col>
+              </ion-row>
+            </ion-label>
+          </ion-item>
+          <!-- <ion-item lines="full" class="transparent">
+            <ion-label class="ion-text-wrap">
+              <ion-row>
+                <ion-col size="5">Due Month: </ion-col> <ion-col size="7">{{biller.dueMonth}}</ion-col>
+              </ion-row>
+            </ion-label>
+          </ion-item> -->
+          <ion-item lines="full" class="transparent">
+            <ion-label>
+              <ion-row>
+                <ion-col size="5">Customer:</ion-col> <ion-col size="7">{{global.user.fullName}}</ion-col>
+              </ion-row> 
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="transparent">
+            <ion-label class="ion-text-wrap">
+              <ion-row>
+                <ion-col size="5">Address:</ion-col> <ion-col size="7"> {{global.user.address}}</ion-col>
+              </ion-row>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="transparent">
+            <ion-label>
+              <ion-row>
+                <ion-col size="5">Paid Amount: </ion-col> <ion-col size="7">{{global.getCurrencyText(global.bank.currencyCode)}} {{amount}}</ion-col>
+              </ion-row>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="full" class="transparent">
+            <ion-label>
+              <ion-row>
+                <ion-col size="5">Reference No.: </ion-col> <ion-col size="7">123456789123456789</ion-col>
+              </ion-row>
+            </ion-label>
+          </ion-item>
+          <div class="ion-text-center ion-padding">
+            <ion-chip color="success" (click)="socialSharing()">
+              <ion-icon name="share-social-outline"></ion-icon>
+              <ion-label>Share Receipt</ion-label>
+            </ion-chip>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-row *ngIf="pageStatus!=3">
+      <ion-col size="6">
+        <ion-button mode="ios" expand="block" color="medium" [disabled]="pageStatus === 1 || pageStatus === 4"
+          (click)="goBack()">
+          Back
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button mode="ios" expand="block" color="tertiary" (click)="next()">
+          Next
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row *ngIf="pageStatus===3">
+      <ion-col size="6">
+        <ion-button mode="ios" expand="block" color="medium" (click)="global.pop()">
+          Home
+        </ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button mode="ios" expand="block" color="tertiary"
+          (click)="global.showToast('This transaction added to favourite list')">
+          Add Favourite
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

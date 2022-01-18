@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary" mode="ios">
+    <br>
+    <ion-searchbar showCancelButton="focus" (ionFocus)="global.showNFCFab=false" (ionBlur)="global.showNFCFab=true"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="btn-card" *ngFor="let s of searchList">
+    <ion-item lines="none" button mode="md" detail="true" (click)="global.setPage(s.url)">
+      <ion-avatar slot="start" style="margin-right:5px !important;">
+        <img src="assets/imgs/{{s.icon}}">
+      </ion-avatar>
+      <ion-label color="primary"> <strong>{{s.title}}</strong> </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

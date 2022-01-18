@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Refer With Friends</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card mode="md" class="custom-card" color="tertiary" style="border-radius: 10px">
+    <img src="assets/imgs/referapp.png" style="height: 150px !important;">
+    <ion-card-header>
+      <ion-card-title color="primary">Refer & Earn</ion-card-title>
+      <ion-card-subtitle>Get benefitted by referring the app</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <p>Invite your friends to use this app via link on social media or share your referal code. And you and your friends both will get paid with 
+        {{global.getCurrencyText(global.bank.currencyCode) }} 1000.
+      </p>
+      <div class="referal-box">
+        <ion-card mode="ios">
+          <ion-item lines="none">
+            <ion-label class="ion-text-center">
+              <p style="font-size: x-small;">You Referral Code</p>
+              <h2><strong><ion-text class="referal-code">INSEE2022</ion-text></strong></h2>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label class="ion-text-center">
+              <h2 class="referal-code"> <ion-text color="primary">Share</ion-text></h2>
+            </ion-label>
+          </ion-item>
+          <ion-row>
+            <ion-col size="3">
+              <img src="assets/imgs/social/whatsapp.png" class="social-app">
+            </ion-col>
+            <ion-col size="3">
+              <img src="assets/imgs/social/fb.png" class="social-app">
+            </ion-col>
+            <ion-col size="3">
+              <img src="assets/imgs/social/insta.png" class="social-app">
+            </ion-col>
+            <ion-col size="3">
+              <img src="assets/imgs/social/twitter.png" class="social-app">
+            </ion-col>
+          </ion-row>
+        </ion-card>
+        <a href="javascript:" style="color:#fff">See My Earnings</a>
+        <div>
+          <ion-label class="ion-text-center">
+            <p style="font-size: x-small;color: #fff;">*1 point = 1000 {{global.getCurrencyText(global.bank.currencyCode) }}</p>
+            <p style="font-size: x-small;color: #fff;">
+              *Offer valid till: {{offerDate | date:'dd MMM, yyyy'}}
+            </p>
+          </ion-label>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <div class="ion-text-center" style="padding-left:10px; padding-right:10px;">
+    <h3 class="share-header">How Refer & Earn Work</h3>
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img src="assets/imgs/wallet/home-page.png">
+      </ion-thumbnail>
+      <ion-label>
+        <h2><strong>Login</strong></h2>
+        <p class="ion-text-wrap">Login to your app & we will provide a unique referral code</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img src="assets/imgs/share.png">
+      </ion-thumbnail>
+      <ion-label>
+        <h2><strong>Invite</strong></h2>
+        <p class="ion-text-wrap">Share your referral code with your friends ask them to use this app</p>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img src="assets/imgs/request-money2.png">
+      </ion-thumbnail>
+      <ion-label>
+        <h2><strong>Earn</strong></h2>
+        <p class="ion-text-wrap">Earn points on every transactions you done through this app, And convert them to real money</p>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>

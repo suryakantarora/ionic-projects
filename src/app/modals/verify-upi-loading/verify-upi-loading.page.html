@@ -1,0 +1,29 @@
+<ion-content>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-label><h2 color="primary">Add UPI ID</h2></ion-label>
+      <ion-buttons slot="end" mode="ios">
+        <ion-button fill="clear" (click)="close(null)">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <br>
+    <div class="ion-padding">
+      <div class="upi-img">
+        <div class="loader"></div>
+        <img src="assets/imgs/bhim-upi-icon.png" class="upi-icon">
+      </div>
+    </div>
+    <ion-item lines="none">
+      <ion-label class="ion-text-center">
+        <p>Verifying UPI ID</p>
+      </ion-label>
+    </ion-item>
+    <br><br>
+  </ion-toolbar>
+</ion-footer>

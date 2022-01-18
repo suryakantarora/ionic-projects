@@ -1,0 +1,204 @@
+<ion-header class="ion-no-border">  
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-item lines="none" color="primary" class="custom-item">
+      <ion-avatar slot="start">
+        <img [src]="global.bank.logo" style="border-radius: 10px !important;border:1px solid #ededed;padding:2px !important">
+      </ion-avatar>
+      <ion-label>
+        <h2><strong> {{global.bank.fullName}} </strong></h2>
+        <p style="font-size: x-small;">Account Details</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-back-button icon="close"></ion-back-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-card class="border">
+      <ion-item mode="md" button detail="false" (click)="showAllAccounts()" lines="full">
+        <ion-thumbnail slot="start">
+          <img [src]="global.user.profilePic" style="border-radius: 10px !important;border:1px solid #ededed;padding:2px !important">
+        </ion-thumbnail>
+        <ion-label>
+          <ion-text color="tertiary"><p style="font-size: x-small;">{{accType}}</p></ion-text>
+          <h2><ion-text color="primary">{{global.maskedNumber(accNum)}}</ion-text> </h2>
+          <h2><strong><ion-text color="primary">{{ global.getCurrencyText(currency) + ' ' + global.formatNumber(balance)}}</ion-text></strong></h2>
+        </ion-label>
+        <ion-button slot="end" fill="clear">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-row>
+        <ion-col>
+          <ion-button fill="outline" color="success" mode="ios" expand="block" size="small">
+            <ion-icon name="refresh"></ion-icon> &nbsp;
+            Refresh
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button fill="outline" color="tertiary" mode="ios" expand="block" size="small">
+            <ion-icon name="share-social-outline"></ion-icon> &nbsp;
+            Share
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button fill="outline" mode="ios" expand="block" size="small">
+            <ion-icon name="eye"></ion-icon> &nbsp;
+            View
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+    <ion-toolbar class="segment-bar">
+      <ion-row>
+        <ion-col size="4" class="first" (click)="btnClicked('EXPENCE')" [ngClass]="btnType==='EXPENCE'?'active':'inactive'">Expence</ion-col>
+        <ion-col size="4" class="second" (click)="btnClicked('STMT')" [ngClass]="btnType==='STMT'?'active':'inactive'">Statement</ion-col>
+        <ion-col size="4" class="last" (click)="btnClicked('DETAIL')" [ngClass]="btnType==='DETAIL'?'active':'inactive'">Details</ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </div>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="btnType==='EXPENCE'">
+    <ion-card>
+      <ion-item lines="full" color="light">
+        <ion-label class="ion-text-center">
+          <p><strong>Weekly Expense</strong></p>
+        </ion-label>
+      </ion-item>
+      <ion-card-content class="ion-text-center">
+        <div style="display: block;">
+          <canvas baseChart 
+            [data]="pieChartData" 
+            [labels]="pieChartLabels" 
+            [chartType]="pieChartType"
+            [options]="pieChartOptions"
+            [plugins]="pieChartPlugins"
+            [legend]="pieChartLegend">
+          </canvas>
+        </div>
+      </ion-card-content>
+      <div>
+        <ion-chip color="tertiary">Total Debit : {{global.getCurrencyText(currency)}} {{global.formatNumber((totalDebit * 1.0).toFixed(2))}}</ion-chip><br>
+        <ion-chip color="success">Total Credit : {{global.getCurrencyText(currency)}} {{global.formatNumber((totalCredit * 1.0).toFixed(2))}}</ion-chip><br>
+        <ion-chip color="primary">Available Balance : {{global.getCurrencyText(currency)}} {{global.formatNumber((avlBal * 1.0).toFixed(2))}}</ion-chip>
+      </div>
+    </ion-card>
+  </div>
+  <div *ngIf="btnType==='STMT'">
+    <ion-list lines="full" mode="ios">
+      <ion-item *ngFor="let r of recents">
+        <ion-label class="ion-text-wrap">
+          <p style="font-size: x-small !important;">{{r.date}}</p>
+          <h2><strong><ion-text color="primary">
+            <span *ngIf="r.type==='DR'">To:</span> 
+            <span *ngIf="r.type==='CR'">From:</span> 
+            {{r.name}}</ion-text></strong></h2>
+        </ion-label>
+        <ion-label slot="end" class="ion-text-right" [color]="r.type==='DR'?'danger':'success'">
+          <p style="font-size: x-small;">
+            {{r.type==='DR'?'Debitted':'Creditted'}}
+          </p>
+          <h2 style="font-size: smaller">
+            <strong>
+              {{global.getCurrencyText(global.bank.currencyCode)}}
+              {{r.amount}}
+            </strong>
+          </h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+  <div *ngIf="btnType==='DETAIL'">
+    <ion-card *ngIf="pageStatus===1">
+      <ion-item lines="full" color="light">
+        <ion-label class="ion-text-center">Account Details</ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Account Number</p>
+          <h2><strong>{{global.maskedNumber(accNum)}}</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Account Type</p>
+          <h2><strong>{{accType}}</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>IFSC Code</p>
+          <h2><strong>CGSMPAY600008</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Account Holder</p>
+          <h2><strong>{{global.user.fullName}}</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Mobile Number</p>
+          <h2><strong>{{global.user.mobile}}</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Email ID</p>
+          <h2><strong>{{global.user.email}}</strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>
+          <p>Account Branch</p>
+          <h2><strong>Egmore, Chennai-TN</strong></h2>
+        </ion-label>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button color="success" expand="block" mode="ios" (click)="shareAcc()">
+          <ion-icon name="share-social-outline"></ion-icon> &nbsp; Share Account Details
+        </ion-button>
+      </div>
+      <!-- <ion-item lines="full">
+        <ion-label>From date</ion-label>
+        <ion-datetime [(ngModel)]="fromDate"></ion-datetime>
+      </ion-item>
+      <ion-item lines="full">
+        <ion-label>From date</ion-label>
+        <ion-datetime [(ngModel)]="toDate"></ion-datetime>
+      </ion-item>
+      <div class="ion-padding">
+        <ion-button expand="block" color="tertiary" (click)="showDetailStmt()">Proceed</ion-button>
+      </div> -->
+    </ion-card>
+    <ion-card *ngIf="pageStatus===2">
+      <ion-item lines="full" color="light">
+        <ion-label class="ion-text-center">
+          <p><strong>Detailed Statement</strong></p>
+        </ion-label>
+      </ion-item>
+      <ion-item *ngFor="let r of recents" lines="full">
+        <ion-label class="ion-text-wrap">
+          <p style="font-size: x-small !important;">{{r.date}}</p>
+          <h2><strong><ion-text color="primary">
+            <span *ngIf="r.type==='DR'">To:</span> 
+            <span *ngIf="r.type==='CR'">From:</span> 
+            {{r.name}}</ion-text></strong></h2>
+        </ion-label>
+        <ion-label slot="end" class="ion-text-right" [color]="r.type==='DR'?'danger':'success'">
+          <p style="font-size: x-small;">
+            {{r.type==='DR'?'Debitted':'Creditted'}}
+          </p>
+          <h2 style="font-size: smaller">
+            <strong>
+              {{global.getCurrencyText(global.bank.currencyCode)}}
+              {{r.amount}}
+            </strong>
+          </h2>
+        </ion-label>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-content>

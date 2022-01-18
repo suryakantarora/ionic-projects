@@ -1,0 +1,173 @@
+<ion-header class="ion-no-border">
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-item lines="none" color="primary" class="custom-item">
+      <ion-avatar slot="start">
+        <img [src]="global.bank.logo"
+          style="border-radius: 10px !important;border:1px solid #ededed;padding:2px !important">
+      </ion-avatar>
+      <ion-label>
+        <h2> <strong> {{global.bank.fullName}} </strong> </h2>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-buttons slot="end">
+          <ion-button fill="clear" color="light" (click)="global.setPage('login')">
+            <img src="assets/imgs/logout.png" style="height: 25px;" />
+          </ion-button>
+          <ion-button fill="clear" color="light" (click)="toggleMenu()">
+            <ion-icon name="menu" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+        <!-- <ion-button (click)="global.navCtrl.pop()">
+          <ion-icon name="close" slot="icon-only"></ion-icon>
+        </ion-button> -->
+      </ion-buttons>
+    </ion-item>
+    <ion-item lines="none" color="primary" class="custom-item">
+      <ion-avatar slot="start" (click)="global.setPage('profile')">
+        <img style="border-radius:8px !important;" [src]="global.user.profilePic" class="profile-pic">
+      </ion-avatar>
+      <ion-label (click)="global.setPage('profile')">
+        <h2> Hello <strong>{{global.user.nickName}}</strong>,</h2>
+        <p> {{global.user.mobile}} </p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="light" (click)="global.setPage('myqr')">
+          <ion-icon name="qr-code-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="light" (click)="global.setPage('notifications')">
+          <ion-icon name="notifications" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    <br><br>
+  </div>
+  <ion-card mode="md" class="no-shadow" style="margin-top: -40px;border:2px solid #4d0202;border-radius: 10px;">
+    <ion-item lines="full">
+      <ion-label>
+        <p>
+          <ion-text color="tertiary">Wallet Balance</ion-text>
+        </p>
+        <h2><strong>
+            <ion-text color="primary">{{global.getCurrencyText(global.bank.currencyCode)}} 10,000,000</ion-text>
+          </strong></h2>
+      </ion-label>
+      <ion-chip color="success" slot="end" (click)="refreshBalance()">
+        <ion-icon name="refresh"></ion-icon>
+        <!-- <ion-label class="ion-text-center" style="font-size: smaller;">Add <br>Money</ion-label> -->
+        <ion-label class="ion-text-center" style="font-size: smaller;">Refresh</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-toolbar>
+      <ion-row>
+        <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+          <ion-card class="btn-card" (click)="global.setPage('w2w')">
+            <ion-item lines="none" button mode="md" (click)="global.setPage('send-money')" class="send-money">
+              <ion-avatar slot="start" style="margin-right:15px !important;">
+                <img src="assets/imgs/send-money.png">
+              </ion-avatar>
+              <ion-label class="ion-text-wrap"> <strong>Send <br>Money</strong> </ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6" style="padding:0px !important; margin: 0px !important;">
+          <ion-card class="btn-card">
+            <ion-item lines="none" button mode="md" (click)="global.setPage('request-money')" class="request-money">
+              <ion-avatar slot="start" style="margin-right:15px !important;">
+                <img src="assets/imgs/request-money.png">
+              </ion-avatar>
+              <ion-label class="ion-text-wrap"> <strong>Request<br>Money</strong> </ion-label>
+            </ion-item>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-toolbar>
+  </ion-card>
+</ion-header>
+
+<ion-content>
+  <ion-card style="border-radius: 10px;">
+    <div style="margin-top: 16px;margin-left: 16px;">
+      <ion-label>
+        <p><b>Quick Pay</b></p>
+      </ion-label>
+    </div>
+    <ion-row>
+      <ion-col class="ion-text-center" (click)="global.setPage('topup')">
+        <div class="menu_item ion-text-center">
+          <div class="fab topup">
+            <img src="assets/imgs/icons/8.png">
+          </div>
+          <p class="ion-text-center">Topup</p>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center" (click)="global.setPage('bill-pay')">
+        <div class="menu_item ion-text-center">
+          <div class="fab bill-pay">
+            <img src="assets/imgs/icons/18.png">
+          </div>
+          <p class="ion-text-center">Bill Pay</p>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center" (click)="global.setPage('scan')">
+        <div class="menu_item ion-text-center">
+          <div class="fab scan">
+            <img src="assets/imgs/icons/qr-scan.png">
+          </div>
+          <p class="ion-text-center">Scan & Pay</p>
+        </div>
+      </ion-col>
+      <ion-col class="ion-text-center" (click)="global.setPage('loyality')">
+        <div class="menu_item ion-text-center">
+          <div class="fab offer">
+            <img src="assets/imgs/icons/13.png">
+          </div>
+          <p class="ion-text-center">Loyalty</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+  <ion-toolbar color="light" style="padding-left: 7px;padding-right: 7px;">
+    <ion-slides pager="true" mode="ios" [options]="slideOpts" #slider (ionSlideDidChange)="slideChanged(slider)">
+      <ion-slide *ngFor="let b of global.offers">
+        <img [src]="b.imgPath">
+      </ion-slide>
+    </ion-slides>
+  </ion-toolbar>
+
+  <ion-card style="border-radius: 10px;">
+    <ion-item color="primary" lines="none">
+      <ion-icon name="newspaper" slot="start" style="margin-right:10px !important;"></ion-icon>
+      <ion-label class="ion-text-left">
+        <strong>Recent Transaction</strong>
+      </ion-label>
+      <ion-chip slot="end" color="light" (click)="global.setPage('walletstatement')">
+        <ion-label>Show All</ion-label>
+      </ion-chip>
+    </ion-item>
+    <ion-list lines="full" mode="ios">
+      <ion-item *ngFor="let r of recents">
+        <ion-label class="ion-text-wrap">
+          <p style="font-size: x-small !important;">{{r.date}}</p>
+          <h2><strong>
+              <ion-text color="primary">
+                <span *ngIf="r.type==='DR'">To:</span>
+                <span *ngIf="r.type==='CR'">From:</span>
+                {{r.name}}</ion-text>
+            </strong></h2>
+        </ion-label>
+        <ion-label slot="end" class="ion-text-right" [color]="r.type==='DR'?'danger':'success'">
+          <p style="font-size: x-small;">
+            {{r.type==='DR'?'Debitted':'Creditted'}}
+          </p>
+          <h2 style="font-size: smaller">
+            <strong>
+              {{global.getCurrencyText(global.bank.currencyCode)}}
+              {{r.amount}}
+            </strong>
+          </h2>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

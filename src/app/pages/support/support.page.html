@@ -1,0 +1,76 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Support</ion-title>
+  </ion-toolbar>
+  <ion-card class="custom-card-top"> 
+    <ion-item lines="none" color="light">
+      <ion-thumbnail slot="start">
+        <img src="assets/imgs/support-512x512.png">
+      </ion-thumbnail>
+      <ion-label>
+        <h2><strong>Need Support?</strong></h2>
+        <p class="ion-text-wrap">Have any issue while using the app, Please feel free to reach us.</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-header>
+
+<ion-content>
+  <ion-card class="custom-card">
+    <ion-item lines="full" button detail="true" (click)="openDialer()">
+      <ion-avatar slot="start">
+        <img src="assets/imgs/telephone.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Call Us</p>
+        <h2> <strong>{{global.user.mobile}}</strong> </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full" button detail="true" (click)="openSms()">
+      <ion-avatar slot="start">
+        <img src="assets/imgs/sms.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Text Us</p>
+        <h2> <strong>Text us your query</strong> </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full" button detail="true" (click)="openMail()">
+      <ion-avatar slot="start">
+        <img src="assets/imgs/gmail.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Email Us</p>
+        <h2> <strong>{{global.user.email}}</strong> </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full" button detail="true" (click)="openWhatsApp()">
+      <ion-avatar slot="start">
+        <img src="assets/imgs/whatsapp.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Live Chat</p>
+        <h2> <strong>Chat with us on WhatsApp</strong> </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="full" button detail="true">
+      <ion-avatar slot="start">
+        <img src="assets/imgs/location.png">
+      </ion-avatar>
+      <ion-label>
+        <p>Locate Us</p>
+        <h2> <strong>Open Google Map</strong> </h2>
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        <p class="ion-text-wrap"><Strong>Note:</Strong>
+          Our support service is active during office time only, You can contact us from 9:000am to 6:00pm
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

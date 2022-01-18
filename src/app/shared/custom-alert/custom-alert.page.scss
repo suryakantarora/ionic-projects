@@ -1,0 +1,27 @@
+.header-text {
+    font-weight: bolder;
+    font-size: larger;
+    font-family: ibmplex;
+    text-align: center;
+    color: var(--ion-color-primary);
+}
+.para-text {
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-family: ibmplex;
+}
+.btn {
+    width: 95%;
+    border-radius:8px;
+    margin: auto;
+    padding:10px;
+    color: var(--ion-color-primary);
+    background-color: #fff;
+    border: 1px solid var(--ion-color-primary);
+    font-weight: bolder;
+    font-family: ibmplex;
+}
+.btn:active {
+    color: #fff;
+    background-color: var(--ion-color-primary);
+}

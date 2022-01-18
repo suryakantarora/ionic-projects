@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{global.bank.shortName}}Bot</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content classs="ion-text-center"
+     [scrollEvents]="true" 
+     (ionScrollStart)="logScrollStart($event)" 
+     (ionScroll)="logScrolling($event)"
+     (ionScrollEnd)="logScrollEnd($event)">
+  <br>
+  <div style="width: 100%;margin:auto;" class="ion-text-center">
+    <ion-chip>
+      <ion-label classs="ion-text-center">
+        {{today| date:'dd MMM yyyy'}}
+      </ion-label>
+    </ion-chip>
+  </div>
+  <div class="chat-bg">
+    <div *ngFor="let m of messageData">
+      <ion-card class="transparent" [ngClass]="m.sender==='robo'?'robo-bg':'user-bg'" class="no-shadow">
+        <ion-item lines="none" class="transparent">
+          <ion-avatar [slot]="m.sender==='robo'?'start':'end'" class="avatar-top" style="height:40px;width:40px">
+            <img src="assets/imgs/avatars/chatbot.svg" class="chat-boat" *ngIf="m.sender==='robo'">
+            <img [src]="global.user.profilePic" class="chat-boat" *ngIf="m.sender!=='robo'">
+          </ion-avatar>
+          <ion-label [ngStyle]="m.sender==='robo'?{}:{float:'right'}">
+            <h2 *ngIf="m.sender==='robo'"> <strong><ion-text color="primary">ChatBot</ion-text></strong> </h2>
+            <h2 *ngIf="m.sender!=='robo'"> <strong><ion-text color="tertiary">{{global.user.fullName}}</ion-text></strong> </h2>
+            <p style="font-size: x-small;">{{m.date | date:'dd MMM yyyy hh:mm'}}</p>
+          </ion-label>
+        </ion-item>
+        <ion-item lines="none" class="transparent">
+          <ion-label>
+            <p class="ion-text-wrap">{{m.message}}</p>
+            <div *ngIf="m.lastFiveTxns">
+              <ion-label *ngFor="let s of m.lastFiveTxns" class="stmt">
+                <p style="font-size: x-small;" [ngClass]="m.sender==='robo'?'robo-msg':'user-msg'">{{s.type}}</p>
+                <h2 style="font-size: smaller;" [ngClass]="m.sender==='robo'?'robo-msg':'user-msg'">{{s.amount}}</h2>
+              </ion-label>
+            </div>
+            <span  class="ion-text-wrap" *ngIf="m.sender==='robo'">
+              <ion-chip color="primary" *ngFor="let o of m.options" (click)="optionClicked(o)">
+                <ion-label>{{o.text}}</ion-label>
+              </ion-chip>
+            </span>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <form #form="ngForm" (ngSubmit)="validateMessage(message)">
+    <ion-toolbar style="padding:5px;--background: #eee !important;">
+      <ion-item lines="none" color="light" class="chat-text">
+        <ion-input type="text" class="ion-text-wrap" [(ngModel)]="message" name="message"
+          placeholder="Enter your message..."></ion-input>
+      </ion-item>
+      <div slot="end">
+        <button type="button" class="send-btn" type="submit">
+          Send
+        </button>
+      </div>
+    </ion-toolbar>
+  </form>
+</ion-footer>

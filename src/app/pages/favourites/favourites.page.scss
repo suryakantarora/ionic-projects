@@ -1,0 +1,34 @@
+.h2 {
+    color: #8f8f8f;
+    font-family: ibmplex;
+}
+.card {
+    border-radius: 10px;
+    box-shadow: none !important;
+    font-family: ibmplex;
+}
+.outline-card {
+    border-radius: 10px;
+    box-shadow: none !important;
+    font-family: ibmplex;
+}
+h2, p {
+    font-family: ibmplex;
+}
+.header-bg {
+    background-color: var(--ion-color-primary);
+    height:100px;
+    background-image: url('/assets/imgs/top-background.png');
+    background-size: cover;
+}
+.header-content {
+    margin-top: -100px;
+}
+.logo {
+    border-radius: 50% !important;
+}
+ion-item {
+    --background: transparent;
+    --ion-color-base: transparent !important;
+    --padding-start: 8px;
+}

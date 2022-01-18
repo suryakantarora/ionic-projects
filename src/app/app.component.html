@@ -1,0 +1,120 @@
+<ion-app>
+  <ion-menu side="start" menuId="sideMenu" contentId="sideMenu">
+    <ion-header class="ion-no-border">
+      <div class="ion-text-center avatar-bg">
+        <br>
+        <img [src]="global.user.profilePic" class="side-menu-avatar">
+        <ion-label>
+          <h2 class="bold"> <ion-text color="light">{{global.user.fullName}}</ion-text> </h2>
+          <p style="color:#ddd"> {{global.user.mobile}} </p>
+          <br>
+        </ion-label>
+        <ion-toolbar color="primary"  class="top-menu-border">
+          <ion-row>
+            <ion-col size="4" class="ion-text-center">
+              <ion-button fill="clear" expand="full" (click)="home()">
+                <img src="assets/imgs/home-active.png" style="height:20px">
+              </ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center" (click)="openPage('tabs/settings')">
+              <ion-button fill="clear" expand="full">
+                <img src="assets/imgs/settings-active.png" style="height:20px">
+              </ion-button>
+            </ion-col>
+            <ion-col size="4" class="ion-text-center">
+              <ion-button fill="clear" color="light" (click)="logout()">
+                <ion-icon name="log-out-outline" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-toolbar>
+      </div>
+    </ion-header>
+    <ion-content>
+      <ion-card class="menu-card">
+        <ion-item button mode="ios" lines="none" (click)="openPage('profile')">
+          <ion-avatar slot="start" class="clear-border">
+            <img src="assets/imgs/profile.png">
+          </ion-avatar>
+          <ion-label class="side-label" color="primary">
+            <h2 class="bold">Profile</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      <ion-card class="menu-card">
+        <ion-item button mode="ios" lines="none" (click)="openPage('accounts')">
+          <ion-avatar slot="start" class="clear-border">
+            <img src="assets/imgs/account.png">
+          </ion-avatar>
+          <ion-label class="side-label" color="primary">
+            <h2 class="bold">Accounts</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      <ion-card class="menu-card">
+        <ion-item button mode="ios" lines="none" (click)="openPage('profile')">
+          <ion-avatar slot="start" class="clear-border">
+            <img src="assets/imgs/qr-pay-1.png">
+          </ion-avatar>
+          <ion-label class="side-label" color="primary">
+            <h2 class="bold">Scan & Pay</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      <ion-card class="menu-card">
+        <ion-item button mode="ios" lines="none" (click)="openPage('statement')">
+          <ion-avatar slot="start" class="clear-border">
+            <img src="assets/imgs/statement.png">
+          </ion-avatar>
+          <ion-label class="side-label" color="primary">
+            <h2 class="bold">Statement</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      <ion-card class="menu-card">
+        <ion-item button mode="ios" lines="none"(click)="openPage('offers')">
+          <ion-avatar slot="start" class="clear-border">
+            <img src="assets/imgs/offers.png">
+          </ion-avatar>
+          <ion-label class="side-label" color="primary">
+            <h2 class="bold">Offers</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      <ion-card class="menu-card">
+        <ion-item button mode="ios" lines="none">
+          <ion-avatar slot="start" class="clear-border">
+            <img src="assets/imgs/share-1.png">
+          </ion-avatar>
+          <ion-label class="side-label" color="primary">
+            <h2 class="bold">Share with friends</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+      <ion-card class="menu-card">
+        <ion-item button mode="ios" lines="none" (click)="openPage('tabs/settings')">
+          <ion-avatar slot="start" class="clear-border">
+            <img src="assets/imgs/settings-1.png">
+          </ion-avatar>
+          <ion-label class="side-label" color="primary">
+            <h2 class="bold">Settings</h2>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </ion-content>
+    <ion-footer class="ion-no-border">
+      <ion-item lines="none">
+        <ion-label class="ion-text-center">
+          <p>Version: 1.0.0</p>
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none" button detail="true" color="primary" class="footer-border" (click)="logout()">
+        <ion-icon name="log-out-outline" slot="start"></ion-icon>
+        <ion-label>
+          <h2>Logout</h2>
+        </ion-label>
+      </ion-item>
+    </ion-footer>
+  </ion-menu>
+  <ion-router-outlet id="sideMenu"></ion-router-outlet>
+</ion-app>

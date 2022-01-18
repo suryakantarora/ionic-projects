@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end" mode="md">
+      <ion-back-button icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Request Money</ion-title>
+  </ion-toolbar>
+  <ion-toolbar color="primary" mode="ios">
+    <ion-segment value="new" style="width: 95%;" [(ngModel)]="requestType">
+      <ion-segment-button value="new">New </ion-segment-button>
+      <ion-segment-button value="pending">Pending </ion-segment-button>
+      <ion-segment-button value="recent">Recent</ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div [ngSwitch]="requestType">
+    <div *ngSwitchCase="'new'">
+      <div class="send">
+        <ion-card style="border-radius: 10px;">
+          <ion-item lines="none" color="light">
+            <ion-label class="ion-text-center">
+              Enter the details correctly
+            </ion-label>
+          </ion-item>
+          <form #form="ngForm" autocomplete="off">
+            <ion-item lines="full">
+              <ion-label position="floating">User Mobile Number</ion-label>
+              <ion-input type="tel" [(ngModel)]="mobileNum" maxlength="10" name="mobile" autocomplete="anyrandomstring"></ion-input>
+              <ion-button slot="end" fill="clear" (click)="showContacts()">
+                <ion-icon name="person-add" slot="icon-only"></ion-icon>
+              </ion-button>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Enter Amount ({{global.bank.currencySymbol}})</ion-label>
+              <ion-input type="tel" [(ngModel)]="amount" maxlength="10" name="amount" autocomplete="anyrandomstring"></ion-input>
+            </ion-item>
+            <ion-item lines="full">
+              <ion-label position="floating">Enter Remarks </ion-label>
+              <ion-input type="text" [(ngModel)]="remarks" maxlength="30" name="remarks" autocomplete="anyrandomstring"></ion-input>
+            </ion-item>
+            <ion-row>
+              <ion-col>
+                <ion-button color="medium" mode="ios" expand="block">
+                  Reset
+                </ion-button>
+              </ion-col>
+              <ion-col>
+                <ion-button color="primary" mode="ios" expand="block" (click)="showSuccess()">
+                  Proceed
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </form>
+        </ion-card>
+      </div>
+    </div>
+    <div *ngSwitchCase="'pending'">
+      <ion-card *ngFor="let p of pendings" style="border-radius: 10px;">
+        <ion-item lines="full">
+          <ion-label>
+            <p><ion-text color="tertiary">{{p.user}}</ion-text></p>
+            <h2><ion-text color="primary"><strong>{{global.maskMobile(p.mobile)}}</strong></ion-text></h2>
+            <p>{{p.date | date: 'dd-MM-yyyy hh:mm'}}</p>
+          </ion-label>
+          <ion-label slot="end" class="ion-text-right">
+            <p><ion-text color="tertiary">Amount</ion-text></p>
+            <h2> <ion-text color="primary">
+                <strong>{{p.currency}} {{global.formatNumber((p.amount * 1.0).toFixed(2))}}</strong>
+            </ion-text> </h2>
+          </ion-label>
+        </ion-item>
+        <ion-row>
+          <ion-col size="6">
+            <ion-button color="danger" mode="ios" expand="block" (click)="requestReject()">
+              <ion-icon name="close-circle-outline"></ion-icon>&nbsp;Reject
+            </ion-button>
+          </ion-col>
+          <ion-col size="6">
+            <ion-button color="success" mode="ios" expand="block"  (click)="requestAccept()">
+              <ion-icon name="checkmark-circle-outline"></ion-icon>&nbsp;Accept
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-card>
+    </div>
+    <div *ngSwitchCase="'recent'">
+      <div class="bg1">
+        <ion-card *ngFor="let r of recent" color="light" style="border-radius: 10px;">
+          <div style="padding-left: 10px;padding-right: 10px;">
+            <p>{{r.date | date: 'dd MMM, yyyy'}} {{getWeekDay(r.date)}}</p>
+          </div>
+          <ion-item *ngFor="let d of r.data;let i = index" [lines]="i === r.data.length - 1 ? 'none':'full'">
+            <ion-label>
+              <p><ion-text color="tertiary">{{d.user}}</ion-text></p>
+              <h2><ion-text color="primary"><strong>{{global.maskMobile(d.mobile)}}</strong></ion-text></h2>
+              <p>{{d.date | date: 'dd-MM-yyyy hh:mm'}}</p>
+            </ion-label>
+            <div slot="end" class="ion-text-right">
+              <ion-label [color]="d.status === 'P'?'danger':'success'">
+                <p>{{d.status === 'P'? 'Pending':'Success'}}</p>
+                <h2><strong>{{d.currency}} {{global.formatNumber((d.amount * 1.0).toFixed(2))}}</strong></h2>
+              </ion-label>
+            </div>
+          </ion-item>
+        </ion-card>
+      </div>
+    </div>
+  </div>
+</ion-content>

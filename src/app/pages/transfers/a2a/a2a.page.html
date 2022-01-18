@@ -1,0 +1,98 @@
+<ion-header class="ion-no-border">  
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-item lines="none" color="primary" class="custom-item">
+      <ion-label>
+        <h2><strong> Fund Transfer </strong></h2>
+        <p style="font-size: smaller;">Send Money to Account or Wallet</p>
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-back-button icon="close"></ion-back-button>
+      </ion-buttons>
+    </ion-item>
+    <ion-card class="border" style="box-shadow: none !important;">
+      <ion-item mode="md" lines="full">
+        <ion-thumbnail slot="end">
+          <img [src]="global.user.profilePic" style="border-radius: 10px !important;border:1px solid #ededed;padding:2px !important">
+        </ion-thumbnail>
+        <ion-label>
+          <ion-text color="tertiary"><p style="font-size: x-small;">Default Account</p></ion-text>
+          <h2><strong><ion-text color="primary">{{accName}}</ion-text></strong></h2>
+        </ion-label>
+      </ion-item>
+      <ion-item mode="md" button detail="false" (click)="showAllAccounts()" lines="none">
+        <ion-label>
+          <ion-text color="tertiary"><p style="font-size: x-small;">{{accType}}</p></ion-text>
+          <h2><ion-text color="primary">{{global.maskedNumber(accNum)}}</ion-text> </h2>
+          <h2><strong><ion-text color="primary">{{ global.getCurrencyText(currency) + ' ' + global.formatNumber(balance)}}</ion-text></strong></h2>
+        </ion-label>
+        <ion-button slot="end" fill="clear">
+          <ion-icon name="chevron-down-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-card>
+  </div>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar style="padding-left: 6px;padding-right: 6px;">
+    <ion-radio-group value="W" [(ngModel)]="sendTo">
+      <div style="padding-left: 10px;"><ion-label><p>Send Money To</p></ion-label></div>
+      <ion-row>
+        <ion-col>
+          <ion-item lines="none" class="radio-btn account">
+            <ion-label> Account</ion-label>
+            <ion-radio value="A"></ion-radio>
+          </ion-item>
+        </ion-col>
+        <ion-col>
+          <ion-item lines="none" class="radio-btn wallet">
+            <ion-label> Wallet</ion-label>
+            <ion-radio value="W"></ion-radio>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </ion-radio-group>
+  </ion-toolbar>
+  <div class="bg">
+    <div class="box">
+      <form class="ion-text-center" (ngSubmit)="validateFields()">
+        <div class="inputBox">
+          <input type="tel" maxlength="16" name="beneficiary" required onkeyup="this.setAttribute('value', this.value);"  value="" [(ngModel)]="toAccount">
+          <label>Beneficiary account number</label>
+        </div>
+        <div class="ion-text-center" *ngIf="sendTo==='W'">
+          <ion-chip color="success" (click)="showContacts()">
+            <ion-icon name="person-add"></ion-icon>
+            <ion-label>Add from contacts</ion-label>
+          </ion-chip>
+          <br><br>
+        </div>
+        <div class="inputBox">
+          <input type="tel" maxlength="16" name="amount" required onkeyup="this.setAttribute('value', this.value);"  value="" [(ngModel)]="amount">
+          <label>Amount ({{global.getCurrencyText(currency)}}) </label>
+        </div>
+        <div class="inputBox">
+          <input type="text" maxlength="20" name="remarks" required onkeyup="this.setAttribute('value', this.value);"  value="" [(ngModel)]="remarks">
+          <label>Remarks </label>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" mode="ios" color="medium" type="reset">
+          Clear
+        </ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="block" mode="ios" color="primary" type="submit" (click)="validateFields()">
+          Proceed
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

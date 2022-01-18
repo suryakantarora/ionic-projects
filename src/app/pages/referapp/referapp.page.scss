@@ -1,0 +1,35 @@
+.custom-card {
+    background-color: var(--ion-color-primary-tint);
+    text-align: center;
+}
+
+.referal-box {
+    width: 300px;
+    margin: auto;
+}
+
+.referal-code {
+    font-family: ibmplex;
+    font-weight: bold;
+    color: orangered;
+    font-size: large;
+}
+
+.social-app {
+    border-radius: 50%;
+    height: 60% !important;
+    margin: auto;
+}
+
+.share-header {
+    font-size: large;
+    font-family: ibmplex;
+    font-weight: bolder;
+}
+
+.myearning {
+    // --background: rgba(206, 7, 13, 0.8) !important;
+    --background: var(--ion-color-secondary-tint);
+    text-align: center;
+    color: #fff;
+}

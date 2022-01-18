@@ -1,0 +1,96 @@
+<ion-header class="ion-no-border">
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <ion-toolbar class="clear">
+      <ion-buttons slot="end">
+        <ion-back-button color="light" icon="close"></ion-back-button>
+      </ion-buttons>
+    </ion-toolbar>
+    <div class="ion-text-center">
+      <img [src]="global.user.profilePic" class="side-menu-avatar">
+      <ion-label>
+        <h2 class="bold" style="font-size: larger;"> <ion-text color="light">{{global.user.fullName}}</ion-text> </h2>
+        <p style="color:#ddd"> {{global.user.mobile}} </p>
+      </ion-label>
+    </div>
+  </div>
+</ion-header>
+
+<ion-content> 
+  <br>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>First Name</p>
+        <h2><strong>{{global.user.fame}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Last Name</p>
+        <h2><strong>{{global.user.lName}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Nick Name</p>
+        <h2><strong>{{global.user.nickName}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Contact No.</p>
+        <h2><strong>{{global.user.mobile}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Email-ID</p>
+        <h2><strong>{{global.user.email}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Gender</p>
+        <h2><strong>
+          <span *ngIf="global.user.sex === 'M'">Male</span>
+          <span *ngIf="global.user.sex === 'F'">Female</span>
+        </strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Email-ID</p>
+        <h2><strong>{{global.user.email}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Date of birth</p>
+        <h2><strong>{{global.user.dob}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p>Address</p>
+        <h2><strong>{{global.user.address}}</strong></h2>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

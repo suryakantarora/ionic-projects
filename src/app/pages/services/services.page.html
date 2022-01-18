@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>Value Added Services</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="btn-card" *ngFor="let s of services">
+    <ion-item lines="none" button mode="md" detail="true" (click)="checkPage(s.url)">
+      <ion-avatar slot="start" style="margin-right:10px !important;">
+        <img src="assets/imgs/{{s.icon}}">
+      </ion-avatar>
+      <ion-label color="primary"> 
+        <h2><strong>{{s.title}}</strong></h2>
+        <p class="ion-text-wrap">
+          <ion-text color="tertiary">{{s.desc}}</ion-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+</ion-content>

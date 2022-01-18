@@ -1,0 +1,108 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>UPI</ion-title>
+    <ion-buttons slot="end">
+      <ion-thumbnail>
+        <img src="assets/imgs/upi.png">
+      </ion-thumbnail>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="card-box">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-text color="primary"><strong>Transfer Money</strong></ion-text>
+      </ion-card-title>
+    </ion-card-header>
+    <div>
+      <ion-row style="padding: 0px !important;margin:5px !important;">
+        <ion-col size="3" class="ion-text-center" (click)="global.setPage('verify-upi')">
+          <div class="card-icon-bg"><img src="assets/imgs/upi/bhim-mobile.png" /></div>
+          <p class="card-label">To UPI ID</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center" (click)="global.setPage('a2a')">
+          <div class="card-icon-bg"><img src="assets/imgs/wallets/home-page.png" class="padding"></div>
+          <p class="card-label">To Bank</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center" (click)="global.setPage('scan')">
+          <div class="card-icon-bg"><img src="assets/imgs/card-scan2.png" class="padding"></div>
+          <p class="card-label">Scan QR</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center" (click)="global.setPage('services')">
+          <div class="card-icon-bg"><img src="assets/imgs/upi/person-add.png" class="padding" /></div>
+          <p class="card-label">To Contacts</p>
+        </ion-col>
+      </ion-row>
+    </div>
+    <ion-item color="light" lines="none" button detail="false">
+      <ion-label class="ion-text-center">
+        <ion-text color="primary">Approve Pending UPI Request
+          <ion-icon name="arrow-forward-outline" style="vertical-align: middle;"></ion-icon>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card class="card-box">
+    <ion-toolbar>
+      <div class="sliders">
+        <ion-slides pager="false" mode="ios" [options]="slideOpts" #slider (ionSlideDidChange)="slideChanged(slider)">
+          <ion-slide *ngFor="let s of sliders">
+            <img [src]="s.imagePath" />
+          </ion-slide>
+        </ion-slides>
+      </div>
+    </ion-toolbar>
+  </ion-card>
+  <ion-card class="card-box">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-text color="primary"><strong>Transfer to other UPI</strong></ion-text>
+      </ion-card-title>
+    </ion-card-header>
+    <div>
+      <ion-row style="padding: 0px !important;margin:5px !important;">
+        <ion-col size="3" class="ion-text-center">
+          <div class="upi-icon-bg"><img src="assets/imgs/logo/paytm-logo.png" style="padding: 2px;" /></div>
+          <p class="card-label">Paytm</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center">
+          <div class="upi-icon-bg"><img src="assets/imgs/logo/gpay-logo.png"></div>
+          <p class="card-label">G-Pay</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center">
+          <div class="upi-icon-bg"><img src="assets/imgs/logo/phonepe-logo.png"></div>
+          <p class="card-label">PhonePe</p>
+        </ion-col>
+        <ion-col size="3" class="ion-text-center">
+          <div class="upi-icon-bg"><img src="assets/imgs/upi.png" style="padding: 5px;" /></div>
+          <p class="card-label">BHIM</p>
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-card>
+  <ion-card class="card-box">
+    <ion-item color="light" lines="none">
+      <ion-label class="ion-text-center card-label">Recent Transactions</ion-label>
+    </ion-item>
+    <ion-list mode="ios">
+      <ion-item *ngFor="let r of recent">
+        <ion-thumbnail slot="start">
+          <img [src]="r.imgPath" class="img-profile">
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{r.name}}</h2>
+          <p>{{global.bank.phoneCode + '-' + global.maskedNumber(r.mobile)}}</p>
+        </ion-label>
+        <ion-chip slot="end" [color]="r.status==='S'?'success':'danger'">
+          <ion-icon [name]="r.status==='S'?'arrow-down-circle':'arrow-up-circle'"></ion-icon>
+          <ion-label>{{global.bank.currencySymbol + ' ' +  r.amount}}</ion-label>
+        </ion-chip>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

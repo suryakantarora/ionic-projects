@@ -1,0 +1,50 @@
+.debit-card {
+    border-radius: 10px !important;
+}
+.card-background {
+
+  ion-card {
+    position: relative;
+    text-align: center;
+  }
+
+  .chip {
+    position: absolute;
+    top: 10%;
+    margin-left: 16px;
+  }
+  .logo {
+      position: absolute;
+      top: 10%;
+      right: 20px;
+  }
+  .card-title {
+    position: absolute;
+    bottom: 50%;
+    font-size: 1.7em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    text-align: left;
+    margin-left: 16px;
+    letter-spacing: 3pt;
+  }
+
+  .card-subtitle {
+    font-size: 1.0em;
+    position: absolute;
+    bottom: 40%;
+    width: 100%;
+    color: #fff;
+  }
+  .user-name {
+    font-size: 1.5em;
+    position: absolute;
+    bottom: 25%;
+    width: 100%;
+    color: #fff;
+    text-align: left;
+    margin-left: 16px;
+  }
+
+}

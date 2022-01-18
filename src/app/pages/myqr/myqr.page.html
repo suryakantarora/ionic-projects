@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-back-button icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title>My QR</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="qr-box">
+    <img [src]="global.user.profilePic" class="avatar">
+    <ion-item lines="none">
+      <ion-label class="ion-text-center">
+        <h2>{{global.user.fullName}}</h2>
+        <p>{{global.user.mobile}}</p>
+      </ion-label>
+    </ion-item>
+    <img src="assets/imgs/myqr-code.png" width="70%">
+    <ion-item lines="none" color="primary" style="border-radius: 0px 0px 12px 12px;">
+      <ion-label class="ion-text-center">
+        <h3>Scan Me</h3>
+      </ion-label>
+    </ion-item>
+  </div>
+</ion-content>
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="light" expand="block" mode="ios" fill="outline" (click)="qrShare()">Share QR</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="light" expand="block" mode="ios">Share Screenshot</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

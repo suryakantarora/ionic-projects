@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button  icon="chevron-back-outline" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title> To UPI </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label position="floating">Search for UPI ID</ion-label>
+      <ion-input type="text" [(ngModel)]="upiId" maxlength="50" (keyup)="checkUpi($event)"></ion-input>
+      <ion-buttons slot="end">
+        <ion-button fill="clear" color="primary" (click)="loadContact()">
+          <ion-icon name="person-add-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>
+  <div *ngIf="upiId && showVerify">
+    <ion-item-divider>
+      <ion-label color="primary"><strong>New UPI - ID</strong></ion-label>
+    </ion-item-divider>
+    <ion-item lines="full">
+      <ion-avatar slot="start" class="avt-bg">
+        <ion-text color="primary" class="avt-text">{{getFirstLetter(upiId)}}</ion-text>
+      </ion-avatar>
+      <ion-label>
+        <h2><ion-text color="primary">{{upiId}}</ion-text></h2>
+      </ion-label>
+      <ion-buttons slot="end" mode="ios">
+        <ion-button fill="solid" shape="round" (click)="verifyUpi()"> 
+          <span  style="padding-left: 10px;padding-right: 10px;">Verify</span>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </div>
+</ion-content>
